@@ -109,7 +109,6 @@ function Navbar() {
               outline: 'none',
               width: '180px',
               transition: 'box-shadow 0.3s ease',
-              display: window.innerWidth <= 480 ? 'none' : 'block',
             }}
             onFocus={e => e.target.style.boxShadow = '0 0 8px #3b82f6'}
             onBlur={e => e.target.style.boxShadow = 'none'}
@@ -176,27 +175,6 @@ function Navbar() {
             Products
           </Link>
           <Link
-            to="/cart"
-            className="navbar-link navbar-link-cart"
-            style={{
-              padding: '6px 12px',
-              borderRadius: '6px',
-              backgroundColor: '#10b981',
-              color: 'white',
-              fontWeight: '600',
-              textDecoration: 'none',
-              display: 'flex !important',
-              alignItems: 'center',
-              gap: '4px',
-              transition: 'background-color 0.3s ease',
-              fontSize: '14px',
-            }}
-            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#059669'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#10b981'}
-          >
-            🛒 Cart <span className="cart-count" style={{ fontWeight: 'bold' }}>{totalItems}</span>
-          </Link>
-          <Link
             to="/login"
             className="navbar-link"
             style={{
@@ -233,6 +211,27 @@ function Navbar() {
             Register
           </Link>
         </div>
+        <Link
+          to="/cart"
+          className="navbar-link navbar-link-cart"
+          style={{
+            padding: '6px 12px',
+            borderRadius: '6px',
+            backgroundColor: '#10b981',
+            color: 'white',
+            fontWeight: '600',
+            textDecoration: 'none',
+            display: 'flex !important',
+            alignItems: 'center',
+            gap: '4px',
+            transition: 'background-color 0.3s ease',
+            fontSize: '14px',
+          }}
+          onMouseEnter={e => e.currentTarget.style.backgroundColor = '#059669'}
+          onMouseLeave={e => e.currentTarget.style.backgroundColor = '#10b981'}
+        >
+          🛒 Cart <span className="cart-count" style={{ fontWeight: 'bold' }}>{totalItems}</span>
+        </Link>
         <div className="navbar-menu-button">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
