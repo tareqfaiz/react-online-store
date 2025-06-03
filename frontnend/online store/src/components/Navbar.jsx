@@ -109,6 +109,7 @@ function Navbar() {
               outline: 'none',
               width: '180px',
               transition: 'box-shadow 0.3s ease',
+              display: window.innerWidth <= 480 ? 'none' : 'block',
             }}
             onFocus={e => e.target.style.boxShadow = '0 0 8px #3b82f6'}
             onBlur={e => e.target.style.boxShadow = 'none'}
@@ -120,8 +121,8 @@ function Navbar() {
               backgroundColor: '#3b82f6',
               border: 'none',
               borderRadius: '50%',
-              width: '36px',
-              height: '36px',
+              width: window.innerWidth <= 480 ? '32px' : '36px',
+              height: window.innerWidth <= 480 ? '32px' : '36px',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',

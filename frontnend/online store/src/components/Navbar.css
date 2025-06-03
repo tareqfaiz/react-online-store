@@ -7,9 +7,13 @@
     height: 24px !important;
   }
 
-  /* Hide shop name text */
+  /* Keep shop name visible */
   .navbar-shop-name {
-    display: none !important;
+    display: inline !important;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
   }
 
   /* Hide Products, Login, Register links in top navbar */
@@ -21,10 +25,43 @@
   .navbar-link-home,
   .navbar-link-cart {
     display: flex !important;
+    font-size: 14px;
+    padding: 6px 8px;
   }
 
-  /* Adjust navbar container spacing */
+  /* Adjust navbar container spacing and layout */
   .navbar-container {
     gap: 8px !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Adjust navbar links container to flex row with no wrap */
+  .navbar-links {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  /* Show hamburger menu button */
+  .navbar-menu-button {
+    display: block !important;
+  }
+
+  /* Adjust search form: hide input, show only button */
+  .navbar-search input.navbar-search-input {
+    display: none !important;
+  }
+
+  .navbar-search button.navbar-search-button {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    font-size: 18px !important;
+  }
+
+  /* Navbar overall height adjustment */
+  nav.navbar {
+    height: 48px !important;
   }
 }
