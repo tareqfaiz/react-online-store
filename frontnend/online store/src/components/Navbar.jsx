@@ -12,7 +12,16 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isCartPreviewOpen, setIsCartPreviewOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 480);
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 480);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -24,7 +33,11 @@ function Navbar() {
 
   const handleLogoClick = () => {
     setCurrentPage(1);
-    navigate('/products?page=1');
+    if (isSmallScreen) {
+      navigate('/');
+    } else {
+      navigate('/products?page=1');
+    }
   };
 
   return (
@@ -95,47 +108,49 @@ function Navbar() {
           </span>
         </div>
 
-        <form onSubmit={handleSearch} className="navbar-search" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="navbar-search-input"
-            style={{
-              padding: '6px 12px',
-              borderRadius: '20px',
-              border: '1px solid #ccc',
-              outline: 'none',
-              width: '180px',
-              transition: 'box-shadow 0.3s ease',
-            }}
-            onFocus={e => e.target.style.boxShadow = '0 0 8px #3b82f6'}
-            onBlur={e => e.target.style.boxShadow = 'none'}
-          />
-          <button
-            type="submit"
-            className="navbar-search-button"
-            style={{
-              backgroundColor: '#3b82f6',
-              border: 'none',
-              borderRadius: '50%',
-              width: window.innerWidth <= 480 ? '32px' : '36px',
-              height: window.innerWidth <= 480 ? '32px' : '36px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              cursor: 'pointer',
-              color: 'white',
-              fontSize: '18px',
-              transition: 'background-color 0.3s ease',
-            }}
-            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#2563eb'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#3b82f6'}
-          >
-            <span role="img" aria-label="search">🔍</span>
-          </button>
-        </form>
+        {!isSmallScreen && (
+          <form onSubmit={handleSearch} className="navbar-search" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="navbar-search-input"
+              style={{
+                padding: '6px 12px',
+                borderRadius: '20px',
+                border: '1px solid #ccc',
+                outline: 'none',
+                width: '180px',
+                transition: 'box-shadow 0.3s ease',
+              }}
+              onFocus={e => e.target.style.boxShadow = '0 0 8px #3b82f6'}
+              onBlur={e => e.target.style.boxShadow = 'none'}
+            />
+            <button
+              type="submit"
+              className="navbar-search-button"
+              style={{
+                backgroundColor: '#3b82f6',
+                border: 'none',
+                borderRadius: '50%',
+                width: window.innerWidth <= 480 ? '32px' : '36px',
+                height: window.innerWidth <= 480 ? '32px' : '36px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                color: 'white',
+                fontSize: '18px',
+                transition: 'background-color 0.3s ease',
+              }}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = '#2563eb'}
+              onMouseLeave={e => e.currentTarget.style.backgroundColor = '#3b82f6'}
+            >
+              <span role="img" aria-label="search">🔍</span>
+            </button>
+          </form>
+        )}
 
         <div className="navbar-links" style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
           <Link
@@ -230,7 +245,7 @@ function Navbar() {
           onMouseEnter={e => e.currentTarget.style.backgroundColor = '#059669'}
           onMouseLeave={e => e.currentTarget.style.backgroundColor = '#10b981'}
         >
-          🛒 Cart <span className="cart-count" style={{ fontWeight: 'bold' }}>{totalItems}</span>
+          🛒 {isSmallScreen ? <><span className="cart-count" style={{ fontWeight: 'bold' }}>{totalItems}</span></> : <>Cart <span className="cart-count" style={{ fontWeight: 'bold' }}>{totalItems}</span></>}
         </Link>
         <div className="navbar-menu-button">
           <button
