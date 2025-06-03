@@ -1,0 +1,30 @@
+/* Responsive styles for Navbar */
+
+@media (max-width: 480px) {
+  /* Make logo smaller */
+  .navbar-logo {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  /* Hide shop name text */
+  .navbar-shop-name {
+    display: none !important;
+  }
+
+  /* Hide Products, Login, Register links in top navbar */
+  .navbar-links .navbar-link:nth-child(n+2):not(.navbar-link-home):not(.navbar-link-cart) {
+    display: none !important;
+  }
+
+  /* Keep Home and Cart visible */
+  .navbar-link-home,
+  .navbar-link-cart {
+    display: flex !important;
+  }
+
+  /* Adjust navbar container spacing */
+  .navbar-container {
+    gap: 8px !important;
+  }
+}
