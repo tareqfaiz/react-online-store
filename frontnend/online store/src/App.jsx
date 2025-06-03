@@ -14,7 +14,7 @@ function App() {
   return (
     <CartProvider>
       <PageProvider>
-      <Router>
+      <Router basename="/react-online-store/">
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <header className="app-header">
             <Navbar />
